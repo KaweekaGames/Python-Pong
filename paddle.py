@@ -8,7 +8,7 @@ class Paddle(Turtle):
         super().__init__()
         self.shape("square")
         self.color("white")
-        self.speed("fastest")
+        self.speed(0)
         self.penup()
         self.shapesize(stretch_wid=1, stretch_len=5)
         self.setheading(UP)

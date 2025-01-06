@@ -13,11 +13,15 @@ class Ball(Turtle):
 
     def change_direction(self, heading):
         if heading in range(0,180):
-            new_heading = heading + 180
+            new_heading = 180- heading
         else:
-            new_heading = heading -180
+            new_heading = 540- heading
+        self.setheading(new_heading)
+
+    def hit_wall(self, heading):
+        new_heading = 360- heading
         self.setheading(new_heading)
 
     def move(self):
-        self.forward(.1)
+        self.forward(5)
 

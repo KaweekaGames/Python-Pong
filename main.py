@@ -2,6 +2,7 @@ from turtle import Screen
 from paddle import Paddle
 from ball import Ball
 import random
+import time
 
 screen = Screen()
 screen.setup(width=1400, height=1000)
@@ -16,15 +17,12 @@ paddle_two = Paddle()
 paddle_one.goto(-680, 0)
 paddle_two.goto(680,0)
 ball = Ball()
-obstacles = []
-obstacles.append(paddle_one)
-obstacles.append(paddle_two)
 
-ball.change_direction(random.randint(0,15))
+ball.change_direction(random.randint(5,20))
 while game_running:
     screen.update()
     screen.listen()
-
+    time.sleep(0.01)
     ball.move()
 
     screen.onkeypress(fun=paddle_two.up, key='Up')
@@ -32,11 +30,11 @@ while game_running:
     screen.onkeypress(fun=paddle_one.up, key='w')
     screen.onkeypress(fun=paddle_one.down, key='s')
 
-    for obstacle in obstacles:
-        if ball.distance(obstacle) < 20:
-            heading = ball.heading()
-            ball.change_direction(heading)
-            print("bounce")
+    if ball.ycor() > 500 or ball.ycor() < -500:
+        ball.hit_wall(ball.heading())
+
+    if paddle_one.distance(ball) < 20 or paddle_two.distance(ball) < 20:
+        ball.change_direction(ball.heading())
 
 
 
